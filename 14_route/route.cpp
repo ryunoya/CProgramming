@@ -1,63 +1,85 @@
 #include <iostream>
-#include <cstdlib>
-
-void print() {
-    std::cout << source << " -> " << destination << " (" << length << " miles)" << std::endl;
-}
+#include <string>
+#include <cstdlib> // rand function
 
 class Route {
+// Access specifier
+private:
+    std::string source;
+    std::string destination;
+    int length;
 
-    private:
-        std::string source;
-        std::string destination;
-        int length;
-
+    // Private method
     void updateLength() {
-        length = (source.empty() || destination.empty()) ? 0 : rand() % 900 + 75; // Assume a fixed length for simplicity
+        length = (source.empty() || destination.empty()) ? 0 : rand() % 900 + 50;
+    }
+public:
+    // Constructors should be public
+    // Constructors have no return type (not even void)
+    // Constructors have the same name as class
+    // No argument constructor
+    // Route() {
+    // length = 0;
+    // }
+    // No argument constructor (second version)
+    Route() : source("-"), destination("-"), length(0) {
+    }
+    // Constructor with arguments
+    Route(const std::string& s, const std::string& d) {
+    setSource(s);
+    setDestination(d);
     }
 
-    public:
-   // route() {
-    //    length = 0;
-    //}
-    
-    route() : source ("-"), destination ("-"), length (0) {
+    // Method print
+    void print() {
+        std::cout << source << " -> " << destination;
+        std::cout << ": " << length << std::endl;
+    }
 
-}
+    // Get functions (getters, accessor functions)
+    std::string getSource() {
+    return source;
+    }
+    std::string getDestination() {
+    return destination;
+    }
+    int getLength() {
+        return length;
+    }
 
-route(const std::string& s, const std::string& d) : source(src), destination(dest) {
-    updateLength();
+    // Set functions (mutator functions, setters)
+    void setSource(const std::string& new_source) {
+        source = new_source;
+        updateLength();
+    }
 
-int getLength(){
-    return length;
-}
-
-// set methods (setters, mutator functions)
-void setSource(std::string& new_source) {
-    source = new_source;
-    // call private method
-    updateLength();
-
-}
-void setDestination(std::string& new_dest) {
-    destination = new_dest;
-
-}
-
-
+    void setDestination(const std::string& new_destination) {
+        destination = new_destination;
+        updateLength();
+    }
+};
 
 int main(void) {
-    srand(time(0)); // Seed the random number generator
-    Route spring_break_trip;
-    spring_break_trip.setSource("Lakeland");
-    spring_break_trip.setDestination("Orlando");
-    spring_break_trip.print();
+    // Set the seed
+    srand(time(0));
 
+    // Create Route object
+    Route spring_trip;
+    spring_trip.print();
 
-    spring_break_trip.setDestination = "New York";
+    // Set the source and destination
+    spring_trip.setSource("Lakeland");
+    spring_trip.setDestination("Tokyo");
+    spring_trip.print();
 
-    route summer_trip("Lakeland", "Tokyo");
-    summer_trip.print();
+    // Did smth with Route
+    //...
+    // Change the destination
+    spring_trip.setDestination("New York");
+    spring_trip.print();
     
+    // Second Route object
+    Route summer_trip("Lakeland", "Los Angeles");
+    summer_trip.print();
     return 0;
 }
