@@ -1,52 +1,43 @@
 #ifndef POINT_HPP
 #define POINT_HPP
-
 #include <string>
 
-class Point {
+class Point {  
 public:
-    Point(int x = 0, int y = 0, const char* new_tag = nullptr);
+    Point(int x =0, int y =0) ;
 
-    // The destructor
-    ~Point();
+    // relational operator
+    bool operator == (const Point& other);
+    bool operator != (const Point& other);
 
-    // Copy constructor
-    Point(const Point& other);
+    // arithmetic operator
+    Point operator + (const Point& other);
+    Point operator - (const Point& other); // to do
+    Point operator * (const Point& other); // to do4
+
+    // arithmetic assignment operator
+    Point& operator += (const Point& other);
+    Point& operator -= (const Point& other); // to do
+    Point& operator *= (const Point& other); // to do
 
 
-    // Relational operators
-    bool operator==(const Point& other) const;
-    bool operator!=(const Point& other) const;
+    // unary operator
+    Point operator - () const; // to do
 
-    // Operator []
-    int& operator[](int index);
-
-    // Arithmetic operators
-    Point operator+(const Point& other) const;
-    Point operator*(const Point& other) const; // TODO
-    Point operator-(const Point& other) const; // TODO
-
-    // Arithmetic assignment operators
-    Point& operator+=(const Point& other);
-    Point& operator*=(const Point& other); // TODO
-    Point& operator-=(const Point& other); // TODO
-
-    // Preincrement
-    Point operator++();
+    // operator []
+    int operator [] (int index);
     
-    // Postincrement
-    Point operator++(int);
-
-    // Assignment operator
-    Point& operator=(const Point& other);
-
-    friend std::istream& operator>>(std::istream& in, Point& p);
     std::string toString() const;
+
+    // preincrement 
+    Point& operator ++ (); 
+    
+    // postincrement
+    Point operator ++ (int);
+
 private:
     int x, y;
-    char* tag;
-};
 
-std::ostream& operator<<(std::ostream& out, const Point& p);
+};
 
 #endif
