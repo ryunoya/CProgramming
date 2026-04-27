@@ -1,17 +1,19 @@
 #include <iostream>
+// TO DO:: PRINT GPA
 
 class Human {
 public:
     Human(const std::string& n = "John Doe", int a = 1) : name(n), age(a) {
-
+        std::cout << "Constructor human\n";  
     }
 
-    void printName () const{
-        std::cout << "my name is: " << name;
+    void printInfo () const{
+        std::cout << "my name is: " << name << std::endl;
     }
 
-private:
     std::string name;
+private:
+    
     int age;
 };
 
@@ -20,11 +22,19 @@ private:
 class Student : public Human {
 public:
     Student(const std::string& n, int a, double g) : Human(n, a), gpa(g) {
+        std::cout << "Constructor student\n";
     }
 
     void study() {
         std::cout << "I am studying OOP\n" << gpa << std::endl;
     }
+
+    //redefine printInfo method
+    void printInfo() const {
+        std::cout << "I am " << name << std::endl;
+        std::cout << "and I am a student.\n";
+    }
+
 private:
     double gpa;
 };
@@ -33,12 +43,14 @@ int main(void) {
 //create human object
     Human h;
 
-    h.printName();
+
+    std::cout << "Constructor human\n";  
 
 //create student object
     Student st("Jane Doe", 20, 3.8);
 
-    st.printName();
+    h.printInfo();
+    st.printInfo();
     st.study();
 
     return 0; 
